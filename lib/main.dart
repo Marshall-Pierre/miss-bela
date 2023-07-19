@@ -35,39 +35,64 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  int currentPageIndex = 0;
+  NavigationDestinationLabelBehavior labelBehavior =
+      NavigationDestinationLabelBehavior.alwaysShow;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            icon: Icon(Icons.add_business_outlined),
+            label: 'Catalogue',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.all_inbox ),
+            label: 'Stock',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.bookmark),
+            icon: Icon(Icons.bookmark_border),
+            label: 'Historique',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.align_vertical_top_sharp),
+            icon: Icon(Icons.align_vertical_top_sharp),
+            label: 'Statistique',
+          ),
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: <Widget>[
+        Container(
+          color: Colors.red,
+          alignment: Alignment.center,
+          child: const Text('Catalogue'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+        Container(
+          color: Colors.green,
+          alignment: Alignment.center,
+          child: const Text('Stock'),
+        ),
+        Container(
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: const Text('Historique'),
+        ),
+        Container(
+          color: Colors.blue,
+          alignment: Alignment.center,
+          child: const Text('Statistique'),
+        ),
+      ][currentPageIndex],
     );
   }
 }
