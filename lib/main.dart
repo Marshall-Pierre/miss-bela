@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miss_bela/modules/catalog/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBar(
+        backgroundColor: Colors.purple.shade300,
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;
@@ -72,11 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: <Widget>[
-        Container(
-          color: Colors.red,
-          alignment: Alignment.center,
-          child: const Text('Catalogue'),
-        ),
+        Catalog(),
         Container(
           color: Colors.green,
           alignment: Alignment.center,
